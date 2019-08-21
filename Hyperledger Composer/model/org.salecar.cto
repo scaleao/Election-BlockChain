@@ -1,0 +1,44 @@
+namespace prg.salecar
+
+enum Marca{
+  o VOLKS
+  o FORD
+  o TOYOTA
+  o DODGE 
+  o CHEVROLET
+  o FIAT
+}
+
+participant User identified by userId{
+  o String userId
+  o Double quantia
+  o String name
+}
+
+participant Comprador extends User{
+
+}
+
+participant Vendedor extends User{
+  o String cnpj optional
+}
+
+asset Carro identified by placa{
+  o String placa
+  o Marca marca
+  o String modelo
+  o String ano
+  o String cor
+}
+
+asset ContratoVenda identified by vendaId{
+  o String vendaId
+  o Double preco
+  -->Carro carro
+  -->Vendedor vendedor
+  -->Comprador comprador
+}
+
+transaction venda{
+  -->ContratoVenda contrato
+}
